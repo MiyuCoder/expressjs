@@ -1,16 +1,20 @@
 var express = require('express');
 var app = express();
 
-var port = 3000;
+var port = 5000;
 
-app.get('/', function(request, response) {
-	response.send('Hello Coders.Tokyo');
+app.set('view engine', 'pug');
+app.set('views', './views');
+
+app.get('/', function(req, res) {
+	res.render('index');
 });
 
-app.get('/database', function(request, response) {
-	response.send('<h1>User name</h1>')
+app.get('/users', function(req, res) {
+	res.send('users list');
 })
 
 app.listen(port, function() {
 	console.log('Server listening on port' + port);
 });
+
