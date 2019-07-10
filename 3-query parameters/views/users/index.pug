@@ -1,0 +1,18 @@
+h1 Users
+
+form(action="/users/search", method="GET")
+	input(id="input-search" type="text", name="q")
+	button Search
+
+ul
+	each user in users
+		li= user.name
+
+script.
+	var searchInput = document.getElementById('input-search');
+	searchInput.value = sessionStorage.getItem('draft');
+	searchInput.addEventListener('change', updateSessionStorage);
+
+	function updateSessionStorage() {
+		sessionStorage.setItem('draft', searchInput.value);
+	}
