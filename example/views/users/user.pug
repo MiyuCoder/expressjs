@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Example App
+        style. 
+            .link a {
+                text-decoration: none;
+                color: blue;
+                font-family: Arial, sans-serif;
+                font-size: 18px;
+            }
+
+            .link a:hover {
+                font-size: 20px;
+                transition: all 0.4s;
+            }
+
+            .link a:active {
+                font-size: 18px;
+                transition: all 0.1s;
+            }
+    body
+        div 
+            h1 Example app
+        ul
+            each user in users
+                li= user.name
+        .link
+            a(href="/layout") click to view layout
+
+        .search-user
+            h1 Search Users
+            form(action="/user/search", method="GET")
+                input(type="text", name="q", class="input-search")
+                button search
+        script.
+            var searchInput = document.getElementById('input-search');
+            searchInput.value = sessionStorage.getItem('draft');
+            searchInput.addEventListener('change', updateSessionStorage);
+
+            function updateSessionStorage() {
+                sessionStorage.setItem('draft', searchInput.value);
+            }
