@@ -13,12 +13,12 @@ router.get('/', function(req, res) {
 
 router.get('/search', function(req, res) {
 	var q = req.query.q;
-	var matchedUsers = users.filter(function(user) {
+	var matchedUsers = db.get('users').value().filter(function(user) {
 		return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
 	});
 	
 	res.render('users/index', {
-		users: mathchUsers
+		users: matchedUsers
 	});
 });
 
