@@ -7,19 +7,20 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// using lowdb
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+
 // using template engines
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-let users = [
-    {
-        id: 1, name: 'Trung',
-    }, {
-        id: 2, name: 'Vuong'
-    }, {
-        id: 3, name: 'Doanh'
-    }
-];
+// Set defaults Users (Require if your Json file is empty
+db.defaults({ users: [] })
+  .write();
 
 app.route('/')
     .get((req, res) => {
@@ -29,7 +30,7 @@ app.route('/')
 app.route('/user')
     .get((req, res) => {
         res.render('users/user', {
-            users: users
+            users: db.get('users').value()
         });
     });
 
@@ -42,7 +43,7 @@ app.route('/user/search')
     .get((req, res) => {
         let q = req.query.q;
 
-        var matchedUsers = users.filter(user => {
+        var matchedUsers = db.get('users').value().filter(user => {
             return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
         });
 
@@ -56,7 +57,7 @@ app.route('/user/create')
         res.render('users/create');
     })
     .post((req, res) => {
-        users.push(req.body);
+        db.get('users').push(req.body).write();
         res.redirect('/user');
     })
 
