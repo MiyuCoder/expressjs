@@ -1,70 +1,78 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var low = require('lowdb');
-var FileSync = require('lowdb/adapters/FileSync');
-var adapter = new FileSync('db.json');
-var shortid = require('shortid');
+// Require Modules
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('db.json');
+const shortid = require('shortid');
+const db = low(adapter);
 
-var db = low(adapter);
-
-// Set some defaults (required if your JSON file is empty)
-db.defaults({ users: [] })
-  .write();
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// parse application/json
-app.use(bodyParser.json());
-
+// Set port has value 5000
 var port = 5000;
 
+// Using Template Engine
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-app.get('/', function(req, res) {
-	res.render('index', {
-		name: 'Phan Quoc Trung'
-	});
-});
+// Set default User 
+db.defaults({ users: [] })
+  .write();
 
-app.get('/users', function(req, res) {
-	res.render('users/index', {
-		users: db.get('users').value()
-	});
-})
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/users/search', function(req, res) {
-	var q = req.query.q;
-	var matchedUsers = users.filter(function(user) {
-		return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-	});
-	
-	res.render('users/index', {
-		users: mathchUsers
-	});
-});
+// Route('/')
+app.route('/')
+    .get((req, res) => {
+        res.render('index', {
+            name: 'Phan Quoc Trung'
+        });
+    })
 
-app.get('/users/create', function(req, res) {
-	res.render('users/create');
-});
+// Route('/users/)
+app.route('/users')
+    .get((req, res) => {
+        res.render('users/index', {
+            users: db.get('users').value()
+        });
+    })
 
-app.get('/users/:id', function(req, res) {
-	var id = req.params.id;
+// Route('/users/search/)
+app.route('/users/search')
+    .get((req, res) => {
+        let q = req.query.q;
+        let matchedUsers = db.get('users').value().filter(user => {
+            return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+        });
+        
+        res.render('users/index', {
+            users: matchedUsers
+        });
+    })
 
-	var user = db.get('users').find({ id: id }).value();
+// Route('/users/create')
+app.route('/users/create')
+    .get((req, res) => {
+        res.render('users/create');
+    })
+    .post((req, res) => {
+        req.body.id = shortid.generate();
+        db.get('users').push(req.body).write();
+        res.redirect('/users');
+    })
 
-	res.render('users/view', {
-		user: user
-	});
-});
+// Route('/users/:id')
+app.route('/users/:id')
+    .get((req, res) => {
+        let id = req.params.id;
 
-app.post('/users/create', function(req, res) {
-	req.body.id = shortid.generate();
-	db.get('users').push(req.body).write();
-	res.redirect('/users');
-});
+        let user = db.get('users').find({ id: id }).value();
+
+        res.render('users/view', {
+            user: user
+        });
+    })
 
 app.listen(port, function() {
 	console.log('Server listening on port' + port);
