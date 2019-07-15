@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const bodyParser = require('body-parser');
+
+// using body parser in req.body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // using template engines
 app.set('view engine', 'pug');
@@ -45,6 +50,15 @@ app.route('/user/search')
             users: matchedUsers
         });
     });
+
+app.route('/user/create')
+    .get((req, res) => {
+        res.render('users/create');
+    })
+    .post((req, res) => {
+        users.push(req.body);
+        res.redirect('/user');
+    })
 
 app.listen(port, () => {
     console.log('Server listening on port, ' + port);
