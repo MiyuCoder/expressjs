@@ -5,6 +5,7 @@ var db = require('../db');
 
 var router = express.Router();
 
+
 router.get('/', function(req, res) {
 	res.render('users/index', {
 		users: db.get('users').value()

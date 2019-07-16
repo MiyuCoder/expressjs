@@ -9,7 +9,7 @@ const shortid = require('shortid');
 const db = low(adapter);
 
 // Set port has value 5000
-var port = 5000;
+const port = 5000;
 
 // Using Template Engine
 app.set('view engine', 'pug');
