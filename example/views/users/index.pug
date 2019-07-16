@@ -1,23 +1,26 @@
-h1 Users
+extends ../layout/common
 
-a(href="/users/create") Register new Users
+block head
+    h1 Users
 
-form(action="/users/search", method="GET")
-	input(id="input-search" type="text", name="q")
-	button Search
+    a(href="/users/create") Register new Users
 
-ul
-	each user in users
-		li
-			span= user.name
-			span &nbsp;
-			a(href="/users/" + user.id) view
+    form(action="/users/search", method="GET")
+        input(id="input-search" type="text", name="q")
+        button Search
 
-script.
-	var searchInput = document.getElementById('input-search');
-	searchInput.value = sessionStorage.getItem('draft');
-	searchInput.addEventListener('change', updateSessionStorage);
+    ul
+        each user in users
+            li
+                span= user.name
+                span &nbsp;
+                a(href="/users/" + user.id) view
 
-	function updateSessionStorage() {
-		sessionStorage.setItem('draft', searchInput.value);
-	}
+    script.
+        var searchInput = document.getElementById('input-search');
+        searchInput.value = sessionStorage.getItem('draft');
+        searchInput.addEventListener('change', updateSessionStorage);
+
+        function updateSessionStorage() {
+            sessionStorage.setItem('draft', searchInput.value);
+        }

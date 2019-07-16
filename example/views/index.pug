@@ -1,2 +1,8 @@
-h1 hello #{name}
-a(href="/users") user
+extends ./layout/common
+
+block head
+    h1 hello #{name}
+    a(href="/users") user
+
+block script
+    script(src="#")

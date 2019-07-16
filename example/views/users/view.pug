@@ -1,5 +1,9 @@
-h1 view user
+extends ../layout/common
 
-p
-	b Name
-	span= user.name
+block head
+    h1 view user
+
+    p
+        b Name
+        span &nbsp;
+        span= user.name
