@@ -1,26 +1,24 @@
-extends ../layout/common
+extends ../layouts/common
 
-block head
-    h1 Users
+block content
+  h1
+    span.mr-3 Users
+    a.btn.btn-primary(href="/users/create") New
 
-    a(href="/users/create") Register new Users
+  .d-flex.align-items-center
+    form.ml-auto(action="/users/search", method="GET", class="d-flex")
+      input(type="text", name="q", class="form-control")
+      button(class="btn btn-primary ml-2") Search
 
-    form(action="/users/search", method="GET", class="d-flex")
-        input(id="input-search" type="text", name="q", class="form-control")
-        button(class="btn btn-primary ml-2") Search
+  table.table
+    tr
+      th Name
+      th Phone
+      th Actions
 
-    ul
-        each user in users
-            li
-                span= user.name
-                span &nbsp;
-                a(href="/users/" + user.id) view
-
-    script.
-        var searchInput = document.getElementById('input-search');
-        searchInput.value = sessionStorage.getItem('draft');
-        searchInput.addEventListener('change', updateSessionStorage);
-
-        function updateSessionStorage() {
-            sessionStorage.setItem('draft', searchInput.value);
-        }
+    each user in users
+      tr
+        td= user.name
+        td= user.phone
+        td
+          a.btn.btn-light(href='/users/' + user.id) View

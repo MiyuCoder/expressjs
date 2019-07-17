@@ -1,24 +1,17 @@
-// Require Modules
-const express = require('express');
-const controller = require('../controllers/user.controller');
+var express = require('express');
 
-const router = express.Router();
+var controller = require('../controllers/user.controller');
 
-// Route('/users/)
-router.route('/')
-    .get(controller.index);
+var router = express.Router();
 
-// Route('/users/search/)
-router.route('/search')
-    .get(controller.search);
+router.get('/', controller.index);
 
-// Route('/users/create')
-router.route('/create')
-    .get(controller.create)
-    .post(controller.postCreate);
+router.get('/search', controller.search);
 
-// Route('/users/:id')
-router.route('/:id')
-    .get(controller.id);
+router.get('/create', controller.create);
+
+router.get('/:id', controller.get);
+
+router.post('/create', controller.postCreate);
 
 module.exports = router;

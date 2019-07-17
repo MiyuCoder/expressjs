@@ -1,33 +1,29 @@
-// Require Modules
-const express = require('express');
-const bodyParser = require('body-parser');
+// req.query
+var express = require('express');
+var bodyParser = require('body-parser');
 
-const userRoute = require('./routes/user.route');
+var userRoute = require('./routes/user.route');
 
-// Set port has value 5000
-const port = 5000;
+var port = 3000;
 
-const app = express();
-
-// Using Template Engine
+var app = express();
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-// Route('/')
-app.route('/')
-    .get((req, res) => {
-        res.render('index', {
-            name: 'Phan Quoc Trung'
-        });
-    });
+app.use(express.static('public'));
 
-// Route('/users/...') Use user.route.js and Route start '/users/..'
+// Routes
+app.get('/', function(req, res) {
+  res.render('index', {
+    name: 'AAA'
+  });
+});
+
 app.use('/users', userRoute);
 
 app.listen(port, function() {
-	console.log('Server listening on port' + port);
+  console.log('Server listening on port ' + port);
 });
-
