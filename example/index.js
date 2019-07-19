@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // req.query
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -19,7 +21,7 @@ app.use(bodyParser.urlencoded({
 })); // for parsing application/x-www-form-urlencoded
 
 // using cookie-parser
-app.use(cookieParser('asdkaodkoas10230'));
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(express.static('public'));
 
