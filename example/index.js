@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
 })); // for parsing application/x-www-form-urlencoded
 
 // using cookie-parser
-app.use(cookieParser());
+app.use(cookieParser('asdkaodkoas10230'));
 
 app.use(express.static('public'));
 
