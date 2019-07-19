@@ -20,8 +20,9 @@ block content
 
     nav(aria-label='...')
         ul.pagination.justify-content-end
-            li.page-item
-                a.page-link(href='#', tabindex='-1', aria-disabled='true') Previous
+            each pagination in paginations
+                li.page-item
+                    a.page-link(href='/products?page=' + (pagination - 2), tabindex='-1', aria-disabled='true') Previous
             
             li.page-item.active(aria-current='page')
                 a.page-link(href='#')= paginationsNumber
@@ -31,5 +32,6 @@ block content
                 li.page-item
                     a.page-link(href='/products?page=' + pagination)= pagination
 
-            li.page-item
-                a.page-link(href='#') Next
+            each pagination in paginations
+                li.page-item
+                    a.page-link(href='/products?page=' + pagination) Next

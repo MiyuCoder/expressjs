@@ -10,13 +10,14 @@ module.exports.index = function (req, res) {
     var end = page * perPage;
 
     var drop = (page - 1) * perPage;
-    var numberPagination = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+    var numberPagination = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
-    var perPagination = 2;
+    var perPagination = 1;
     var startPagination = (page - 1) * perPagination;
     var endPagination = page * perPagination;
 
     res.render('products/index', {
+        // products: db.get('products').slice(start, end).value();
         products: db.get('products').drop(drop).take(perPage).value(),
         paginations: numberPagination.slice(startPagination, endPagination),
         paginationsNumber: page
