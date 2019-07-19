@@ -13,6 +13,29 @@
       "id": "ChHWec88f",
       "email": "khanhvuong@gmail.com",
       "password": "7af25da4cbf26f9c0f121585d176cf71"
+    },
+    {
+      "name": "michel",
+      "phone": "1230123",
+      "id": "cpk38IPzb"
+    },
+    {
+      "name": "thinh pham",
+      "phone": "03568656",
+      "id": "htDD1b4cb",
+      "avatar": "uploads/f5421d6f6056a5bcedfd56e72a4acbd2"
+    },
+    {
+      "name": "miyucoder",
+      "phone": "034669981545",
+      "id": "7QJtrawiU",
+      "avatar": "uploads/3a5f158f27ceac218e3542a8770d5bda"
+    },
+    {
+      "name": "sasuke",
+      "phone": "ddd",
+      "id": "sJi9vgIpW",
+      "avatar": "uploads/a2987e1479cf5ef8b7590dc18a1b23a3"
     }
   ],
   "products": [
