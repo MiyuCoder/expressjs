@@ -6,9 +6,6 @@ module.exports.index = function (req, res) {
     // end = (n-1) * x + x = n * x;
     // items = array.slice(begin, end)
 
-    var start = (page - 1) * perPage;
-    var end = page * perPage;
-
     var drop = (page - 1) * perPage;
     var numberPagination = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
@@ -16,10 +13,21 @@ module.exports.index = function (req, res) {
     var startPagination = (page - 1) * perPagination;
     var endPagination = page * perPagination;
 
+    var sessionId = req.signedCookies.sessionId;
+    var allCart = db.get('sessions').find({
+        id: sessionId
+    }).get('cart').value();
+
+    var countCart = 0;
+    for (let item in allCart) {
+        countCart += allCart[item];
+    }
+
     res.render('products/index', {
         // products: db.get('products').slice(start, end).value();
         products: db.get('products').drop(drop).take(perPage).value(),
         paginations: numberPagination.slice(startPagination, endPagination),
-        paginationsNumber: page
+        paginationsNumber: page,
+        countCart: countCart
     });
 }
