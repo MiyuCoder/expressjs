@@ -687,5 +687,13 @@
         "47c460da-e02a-48f1-9b03-c309cff0520e": 1
       }
     }
+  ],
+  "transfers": [
+    {
+      "id": "cq-KPSHnx",
+      "amount": 5000000,
+      "accountId": "phan quoc trung",
+      "userId": "sybJnMlAW"
+    }
   ]
 }

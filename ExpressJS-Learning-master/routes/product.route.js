@@ -5,4 +5,4 @@ var controller = require('../controllers/product.controller');
 
 router.get('/', controller.showAllProduct);
 
-module.exports = router
+module.exports = router;

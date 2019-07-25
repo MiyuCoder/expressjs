@@ -21,6 +21,8 @@ html
                                 span= " (" + countCart + ")"
                         else
                             a(href="/cart", class="nav-link")| Cart
+                    li.nav-item
+                        a.nav-link(href='/transfer/create') Transfer
             if user
                 p= user.name
 
