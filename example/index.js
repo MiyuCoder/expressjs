@@ -33,9 +33,6 @@ app.use(bodyParser.urlencoded({
 // using cookie-parser
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(sessionMiddleware);
-app.use(csurf({
-    cookie: true
-}));
 
 app.use(express.static('public'));
 
@@ -51,6 +48,9 @@ app.use('/auth', authRoute);
 app.use('/products', productRoute);
 app.use('/cart', cartRoute);
 app.use('/transfer', authMiddleware.requireAuth, transferRoute);
+app.use(csurf({
+    cookie: true
+}));
 
 app.listen(port, function () {
     console.log('Server listening on port ' + port);
