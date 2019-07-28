@@ -5,6 +5,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var csurf = require('csurf');
+var mongoose = require('mongoose');
+
+// connect database mongodb
+mongoose.connect(process.env.MONGO_URL);
 
 var userRoute = require('./routes/user.route');
 var authRoute = require('./routes/auth.route');
@@ -38,7 +42,7 @@ app.use(express.static('public'));
 // Routes
 app.get('/', authMiddleware.requireAuth, function (req, res) {
     res.render('index', {
-        name: 'Phan Quoc Trung'
+        name: 'Hello Coders.Tokyo'
     });
 });
 

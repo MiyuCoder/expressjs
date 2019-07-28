@@ -18,20 +18,20 @@ block content
                         p.card-text= product.description
                         a.btn.btn-primary(href='/cart/add/' + product.id) Add to cart
 
-    nav(aria-label='...')
-        ul.pagination.justify-content-end
-            each pagination in paginations
-                li.page-item
-                    a.page-link(href='/products?page=' + (pagination - 2), tabindex='-1', aria-disabled='true') Previous
+    //- nav(aria-label='...')
+    //-     ul.pagination.justify-content-end
+    //-         each pagination in paginations
+    //-             li.page-item
+    //-                 a.page-link(href='/products?page=' + (pagination - 2), tabindex='-1', aria-disabled='true') Previous
             
-            li.page-item.active(aria-current='page')
-                a.page-link(href='#')= paginationsNumber
-                    span.sr-only (current)
+    //-         li.page-item.active(aria-current='page')
+    //-             a.page-link(href='#')= paginationsNumber
+    //-                 span.sr-only (current)
 
-            each pagination in paginations
-                li.page-item
-                    a.page-link(href='/products?page=' + pagination)= pagination
+    //-         each pagination in paginations
+    //-             li.page-item
+    //-                 a.page-link(href='/products?page=' + pagination)= pagination
 
-            each pagination in paginations
-                li.page-item
-                    a.page-link(href='/products?page=' + pagination) Next
+    //-         each pagination in paginations
+    //-             li.page-item
+    //-                 a.page-link(href='/products?page=' + pagination) Next
