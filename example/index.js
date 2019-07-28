@@ -47,10 +47,10 @@ app.use('/users', authMiddleware.requireAuth, userRoute);
 app.use('/auth', authRoute);
 app.use('/products', productRoute);
 app.use('/cart', cartRoute);
-app.use('/transfer', authMiddleware.requireAuth, transferRoute);
 app.use(csurf({
     cookie: true
 }));
+app.use('/transfer', authMiddleware.requireAuth, transferRoute);
 
 app.listen(port, function () {
     console.log('Server listening on port ' + port);
