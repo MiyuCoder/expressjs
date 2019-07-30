@@ -34,7 +34,26 @@ module.exports.index = function (req, res) {
 
     Product.find().then(function (products) {
         res.render('products/index', {
-            products: products
+            products: products,
         });
     });
+}
+
+module.exports.search = function (req, res) {
+    var q = req.query.q;
+    Product.find({
+            $text: {
+                $search: q
+            },
+        })
+        .then(function (products) {
+            res.render('products/index', {
+                products: products
+            });
+        })
+        .catch(e => console.error(e));
+}
+
+module.exports.post = function (req, res, next) {
+    next();
 }

@@ -4,13 +4,13 @@ html
         link(rel="stylesheet", href="/styles/custom.css")
     body
         nav.navbar.navbar-expand-lg.navbar-light.bg-light
-            a.navbar-brand(href='#') Coders.Tokyo
+            a.display-4.navbar-brand(href='#') AnimeXYZ
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             #navbarNav.collapse.navbar-collapse
                 ul.navbar-nav
                     li.nav-item
-                        a.nav-link(href='/') Home
+                        a.nav-link(href='/') Trang Chủ
                     li.nav-item
                         a.nav-link(href='/users') Users
                     li.nav-item
@@ -23,8 +23,15 @@ html
                             a(href="/cart", class="nav-link")| Cart
                     li.nav-item
                         a.nav-link(href='/transfer/create') Transfer
+            
             if user
-                p= user.name
+                img.rounded-circle(src='/' + user.avatar, alt="avatar", width="50px", height="50px")
+            else
+                img.rounded-circle(src="/images/default.png", alt="avatar", width="50px", height="50px")
 
         .container.pt-5
             block content
+
+        script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js')
+        script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')    

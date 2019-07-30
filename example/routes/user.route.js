@@ -1,6 +1,6 @@
 var express = require('express');
 var multer = require('multer');
-
+var authMiddleware = require('../middleware/auth.middleware');
 var controller = require('../controllers/user.controller');
 
 var upload = multer({
@@ -9,13 +9,13 @@ var upload = multer({
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/', authMiddleware.requireAuth, controller.index);
 
-router.get('/search', controller.search);
+router.get('/search', authMiddleware.requireAuth, controller.search);
 
 router.get('/create', controller.create);
 
-router.get('/:id', controller.get);
+router.get('/:id', authMiddleware.requireAuth, controller.get);
 
 router.post('/create', upload.single('avatar'), controller.postCreate);
 
